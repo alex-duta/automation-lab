@@ -196,6 +196,7 @@ Once the backend is running, access the interactive API documentation at:
 - `GET /users` - Retrieve all users
 - `POST /users` - Create a new user
 - `POST /users/{user_id}/upload-profile-pic` - Upload profile picture
+- `POST /reset` - Empty the user list and delete the uploaded profile pictures (a test suite calls it before a run)
 
 ## Features
 

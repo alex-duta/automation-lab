@@ -122,3 +122,22 @@ async def list_users(
         "size": size,
         "items": paginated,
     }
+
+
+# ---------------------------------------------------
+# POST /reset - Reset Data
+# Empties the user list and deletes the uploaded profile pictures, so that a run
+# of a test suite starts from the same state every time.
+# ---------------------------------------------------
+@router.post("/reset")
+async def reset_data():
+    write_users({"users": []})
+
+    # Delete the uploaded profile pictures
+    if os.path.isdir(PROFILE_DIR):
+        for name in os.listdir(PROFILE_DIR):
+            path = os.path.join(PROFILE_DIR, name)
+            if os.path.isfile(path):
+                os.remove(path)
+
+    return {"message": "Data reset"}
